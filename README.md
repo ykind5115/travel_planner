@@ -1,46 +1,46 @@
 # Travel Planner
 
-A multi-agent travel planning project built with `LangGraph`, `FastAPI`, and `Streamlit`.
+一个基于 `LangGraph`、`FastAPI` 和 `Streamlit` 构建的多 Agent 智能旅行规划项目。
 
-This project models travel planning as a graph-based workflow:
+这个项目将旅行规划拆解为一个图工作流：
 
-- `PreferenceAgent` enriches user preferences
-- `DestinationAgent` recommends destinations
-- `FlightAgent`, `HotelAgent`, and `ActivityAgent` run in parallel inside a LangGraph subgraph
-- `BudgetAgent` validates cost and triggers bounded adjustment loops
+- `PreferenceAgent` 负责补全和整理用户偏好
+- `DestinationAgent` 负责推荐目的地
+- `FlightAgent`、`HotelAgent`、`ActivityAgent` 在 LangGraph 子图中并行执行
+- `BudgetAgent` 负责预算校验和有限次调整循环
 
-The result is a portfolio-style AI engineering project that demonstrates:
+这个项目适合作为 AI 工程、后端工程、多 Agent 编排方向的作品集项目，重点展示：
 
-- graph-based orchestration with `LangGraph`
-- multi-agent task decomposition
-- parallel search as a subgraph
-- backend/frontend separation with `FastAPI` + `Streamlit`
-- structured state management with `Pydantic`
+- 使用 `LangGraph` 进行图式工作流编排
+- 多 Agent 的任务拆分与协作
+- 并行搜索子图设计
+- `FastAPI` + `Streamlit` 的前后端分离
+- 基于 `Pydantic` 的结构化状态管理
 
-## Architecture
+## 项目架构
 
 ```text
-Streamlit UI
+Streamlit 前端
    |
    v
-FastAPI API
+FastAPI 后端
    |
    v
-LangGraph Main Graph
+LangGraph 主图
    |
    +--> Preference Agent
    +--> Destination Agent
-   +--> Parallel Search Subgraph
+   +--> 并行搜索子图
    |      +--> Flight Agent
    |      +--> Hotel Agent
    |      +--> Activity Agent
    |
    +--> Budget Agent
    |
-   +--> Final Travel Plan
+   +--> 最终旅行规划结果
 ```
 
-## Tech Stack
+## 技术栈
 
 - Python 3.12+
 - LangGraph
@@ -51,50 +51,50 @@ LangGraph Main Graph
 - python-dotenv
 - loguru
 
-## Project Structure
+## 目录结构
 
 ```text
-agents/         Agent implementations
-api/            FastAPI backend
-config/         Runtime config and prompt templates
-models/         Pydantic schemas and workflow state
-orchestrator/   LangGraph orchestration
-tools/          Mock search/data tools
-ui/             Streamlit frontend
+agents/         Agent 实现
+api/            FastAPI 后端服务
+config/         运行配置与 Prompt 模板
+models/         Pydantic 数据模型与工作流状态
+orchestrator/   LangGraph 工作流编排
+tools/          Mock 数据与搜索工具
+ui/             Streamlit 前端
 ```
 
-## Features
+## 核心特性
 
-- End-to-end multi-agent travel planning
-- Graph-based orchestration instead of ad hoc async control flow
-- Parallel flight/hotel/activity search
-- Budget guardrail with retry loop
-- Mock-friendly local demo mode
-- API-driven frontend
+- 端到端多 Agent 旅行规划
+- 使用 LangGraph 替代零散异步控制流
+- 航班、酒店、活动并行搜索
+- 预算护栏与有限次调整机制
+- 支持本地 Mock 模式快速演示
+- API 驱动前端页面
 
-## Run Locally
+## 本地运行
 
-Install dependencies:
+安装依赖：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Start the backend:
+启动后端：
 
 ```bash
 python -m api.app
 ```
 
-Start the frontend in another terminal:
+在另一个终端启动前端：
 
 ```bash
 streamlit run ui/streamlit_app.py
 ```
 
-## Environment Variables
+## 环境变量
 
-Create a local `.env` file with values like:
+在本地创建 `.env` 文件，示例如下：
 
 ```env
 LLM_PROVIDER=mock
@@ -111,12 +111,12 @@ API_BASE_URL=http://localhost:8000
 LOG_LEVEL=INFO
 ```
 
-## API Endpoints
+## API 接口
 
 - `GET /api/health`
 - `POST /api/plan`
 - `POST /api/plan/full`
 
-## Why This Project Matters
+## 项目价值
 
-This repository is designed as a strong interview and portfolio project for AI engineering and backend roles. It highlights practical orchestration design, modular agent boundaries, stateful workflow control, and a clean frontend/backend split.
+这个仓库不是一个简单的接口调用 Demo，而是一个更接近工程化作品集的多 Agent 项目。它展示了图编排、状态流转、并行节点设计、预算控制逻辑，以及清晰的前后端分层方式，适合用于简历、面试和 GitHub 项目展示。
